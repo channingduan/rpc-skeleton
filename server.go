@@ -26,7 +26,7 @@ func main() {
 
 	var srvHuman config.Method
 	var f service.Human
-	srvHuman.Name = "hello"
+	srvHuman.Name = "hello.world"
 	srvHuman.Func = f.Hello
 
 	srv := server.NewServer(&conf)

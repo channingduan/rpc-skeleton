@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"github.com/channingduan/gateway/service"
 	"github.com/channingduan/rpc/client"
 	"github.com/channingduan/rpc/config"
 	rpcClient "github.com/smallnest/rpcx/client"
@@ -71,28 +70,30 @@ func callRpc() {
 func callGateway() {
 
 	cc := &codec.MsgpackCodec{}
-	args := config.Request{
-		Message: "Hello world",
-	}
-	data, _ := cc.Encode(args)
+	//args := config.Request{
+	//	Message: "Hello world",
+	//}
+	//payload, _ := cc.Encode(args)
 
-	var serviceName = "service"
-	var serviceMethod = "hello"
+	payload := []byte(`{"name":"hello"}`)
 
-	url := fmt.Sprintf("http://127.0.0.1:9090/%s/%s", "hello", "world")
+	//var serviceName = "service"
+	//var serviceMethod = "hello.world"
+
+	url := fmt.Sprintf("http://127.0.0.1:9090/%s/%s/%s", "service", "hello", "world")
 	fmt.Println("url", url)
-	req, err := http.NewRequest("POST", url, bytes.NewReader(data))
+	req, err := http.NewRequest("POST", url, bytes.NewReader(payload))
 	if err != nil {
 		log.Fatal("failed to create request: ", err)
 		return
 	}
 
-	h := req.Header
+	//h := req.Header
 	// h.Set(gateway.XMessageID, strconv.Itoa(rand.Int()))
 	// h.Set(gateway.XMessageType, "0")
-	h.Set(service.XSerializeType, "3")
-	h.Set(service.XServicePath, serviceName)
-	h.Set(service.XServiceMethod, serviceMethod)
+	//h.Set(service.XSerializeType, "3")
+	//h.Set(service.XServicePath, serviceName)
+	//h.Set(service.XServiceMethod, serviceMethod)
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {

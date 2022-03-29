@@ -106,3 +106,7 @@ require (
 	gorm.io/datatypes v1.0.3 // indirect
 	gorm.io/gorm v1.22.2 // indirect
 )
+
+replace (
+	github.com/channingduan/rpc => ../rpc
+)
