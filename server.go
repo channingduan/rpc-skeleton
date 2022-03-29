@@ -1,9 +1,9 @@
 package main
 
 import (
+	"github.com/channingduan/rpc-skeleton/service"
 	"github.com/channingduan/rpc/config"
 	"github.com/channingduan/rpc/server"
-	"github.com/channingduan/rpc/service"
 )
 
 func main() {

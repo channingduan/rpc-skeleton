@@ -20,7 +20,7 @@ func main() {
 }
 func call() {
 
-	discovery, err := rpcClient.NewConsulDiscovery(config.BasePath, "service", []string{"127.0.0.1:8500"}, nil)
+	discovery, err := rpcClient.NewConsulDiscovery("rpc", "service", []string{"127.0.0.1:8500"}, nil)
 	if err != nil {
 		fmt.Println("NewDiscovery err: ", err)
 	}
