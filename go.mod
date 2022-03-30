@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/channingduan/gateway v0.0.0-20220327080043-a94df0e263d2
-	github.com/channingduan/rpc v0.0.0-20220327075859-c07f5874ae75
+	github.com/channingduan/rpc v0.0.0-20220329013935-7420dc604818
 	github.com/smallnest/rpcx v1.7.3
 )
 
@@ -32,6 +32,7 @@ require (
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-redis/redis/v8 v8.11.4 // indirect
 	github.com/go-redis/redis_rate/v9 v9.1.2 // indirect
+	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20210107165309-348f09dbbbc0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
@@ -48,6 +49,14 @@ require (
 	github.com/hashicorp/golang-lru v0.5.4 // indirect
 	github.com/hashicorp/serf v0.9.6 // indirect
 	github.com/influxdata/influxdb1-client v0.0.0-20200827194710-b269163b24ab // indirect
+	github.com/jackc/chunkreader/v2 v2.0.1 // indirect
+	github.com/jackc/pgconn v1.10.0 // indirect
+	github.com/jackc/pgio v1.0.0 // indirect
+	github.com/jackc/pgpassfile v1.0.0 // indirect
+	github.com/jackc/pgproto3/v2 v2.1.1 // indirect
+	github.com/jackc/pgservicefile v0.0.0-20200714003250-2b9c44734f2b // indirect
+	github.com/jackc/pgtype v1.8.1 // indirect
+	github.com/jackc/pgx/v4 v4.13.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.2 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
@@ -104,9 +113,10 @@ require (
 	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/datatypes v1.0.3 // indirect
+	gorm.io/driver/mysql v1.1.3 // indirect
+	gorm.io/driver/postgres v1.2.1 // indirect
 	gorm.io/gorm v1.22.2 // indirect
+	gorm.io/plugin/dbresolver v1.1.0 // indirect
 )
 
-replace (
-	github.com/channingduan/rpc => ../rpc
-)
+replace github.com/channingduan/rpc => ../rpc

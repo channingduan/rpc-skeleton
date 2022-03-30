@@ -46,11 +46,13 @@ func callRpc() {
 		Message: "Hello world",
 	}
 	conf := config.Config{
-		BasePath:     "rpc",
-		ServicePath:  "service",
-		ServiceName:  "test",
-		ServiceAddr:  "127.0.0.1:8089",
-		RegistryAddr: "127.0.0.1:8500",
+		BasePath:    "rpc",
+		ServicePath: "service",
+		ServiceName: "test",
+		ServiceAddr: "127.0.0.1:8089",
+		RegistryConfig: config.RegistryConfig{
+			Addr: "127.0.0.1:8500",
+		},
 	}
 
 	xClient := client.NewClient(&conf)
@@ -79,8 +81,7 @@ func callGateway() {
 
 	//var serviceName = "service"
 	//var serviceMethod = "hello.world"
-
-	url := fmt.Sprintf("http://127.0.0.1:9090/%s/%s/%s", "service", "hello", "world")
+	url := fmt.Sprintf("http://127.0.0.1:9000/%s/%s/%s", "test", "hello", "world")
 	fmt.Println("url", url)
 	req, err := http.NewRequest("POST", url, bytes.NewReader(payload))
 	if err != nil {
@@ -97,7 +98,7 @@ func callGateway() {
 
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
-		log.Fatal("#%d failed to call: ", err)
+		log.Fatalf("#%v failed to call: ", err)
 	}
 	defer res.Body.Close()
 
