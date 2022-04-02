@@ -30,6 +30,7 @@ type Human struct {
 
 func (h *Human) Hello(ctx context.Context, resp *config.Request, reply *config.Response) error {
 
+	time.Sleep(1 * time.Second)
 	message := "Human Hello"
 	reply.Message = message
 	log.Debug("Human Hello...", time.Now().String(), resp.Message)

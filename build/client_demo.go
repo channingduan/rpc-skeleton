@@ -14,8 +14,10 @@ import (
 	"net/http"
 )
 
+// 调用RPC服务介绍
 func main() {
 	//callRpc()
+
 	callGateway()
 }
 func call() {
@@ -72,37 +74,19 @@ func callRpc() {
 func callGateway() {
 
 	cc := &codec.MsgpackCodec{}
-	//args := config.Request{
-	//	Message: "Hello world",
-	//}
-	//payload, _ := cc.Encode(args)
-
-	payload := []byte(`{"name":"hello"}`)
-
-	//var serviceName = "service"
-	//var serviceMethod = "hello.world"
-	url := fmt.Sprintf("http://127.0.0.1:9000/%s/%s/%s", "test", "hello", "world")
-	fmt.Println("url", url)
+	payload := []byte(`{"username":"hello"}`)
+	url := fmt.Sprintf("http://127.0.0.1:9000/%s/%s/%s", "test", "user", "login")
 	req, err := http.NewRequest("POST", url, bytes.NewReader(payload))
 	if err != nil {
 		log.Fatal("failed to create request: ", err)
 		return
 	}
-
-	//h := req.Header
-	// h.Set(gateway.XMessageID, strconv.Itoa(rand.Int()))
-	// h.Set(gateway.XMessageType, "0")
-	//h.Set(service.XSerializeType, "3")
-	//h.Set(service.XServicePath, serviceName)
-	//h.Set(service.XServiceMethod, serviceMethod)
-
 	res, err := http.DefaultClient.Do(req)
 	if err != nil {
 		log.Fatalf("#%v failed to call: ", err)
 	}
 	defer res.Body.Close()
-
-	// handle http response
+	// 处理返回
 	replyData, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		log.Fatal("failed to read response: ", err)

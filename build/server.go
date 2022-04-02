@@ -1,16 +1,19 @@
 package main
 
 import (
-	"fmt"
+	"github.com/channingduan/rpc-skeleton/controller"
 	"github.com/channingduan/rpc-skeleton/models"
-	"github.com/channingduan/rpc-skeleton/service"
+	"github.com/channingduan/rpc-skeleton/router"
 	"github.com/channingduan/rpc/config"
 	"github.com/channingduan/rpc/database"
 	"github.com/channingduan/rpc/server"
-	"github.com/oscto/ky3k"
 	"github.com/smallnest/rpcx/log"
-	"os"
 )
+
+type Router struct {
+	Name  string `json:"name"`
+	Roter string
+}
 
 func main() {
 
@@ -18,30 +21,15 @@ func main() {
 	//ctx, cancel := context.WithCancel(ctx)
 	//defer cancel()
 
+	// 初始化配置文件
 	conf, err := config.Register("./server.json")
-	fmt.Println(ky3k.JsonToString(conf))
 	if err != nil {
 		log.Errorf("config parse error: %v", conf)
 	}
-
-	var srvJerry config.Method
-	srvJerry.Name = "jerry"
-	srvJerry.Func = service.Jerry
-
-	var srvHuman config.Method
-	var f service.Human
-	srvHuman.Name = "hello.world"
-	srvHuman.Func = f.Hello
-
+	// 初始化数据库
 	db := database.Register(conf)
-	err = db.AutoMigrate(&models.User{}, &models.ShippingAddress{})
-	if err != nil {
-		fmt.Println("AutoMigrate: ", err)
-		os.Exit(1)
-	}
+	_ = db.AutoMigrate(&models.User{}, &models.ShippingAddress{})
 	srv := server.NewServer(conf)
-
-	srv.AddMethod(srvJerry)
-	srv.AddMethod(srvHuman)
+	router.Initial(srv, controller.Register(conf))
 	srv.Start()
 }

@@ -3,6 +3,7 @@
   "service_path":"test",
   "service_name":"测试服务",
   "service_addr":"127.0.0.1:8089",
+  "rate_limit": 10,
   "registry_config":{
     "driver":"consul",
     "addr":"127.0.0.1:8500"
