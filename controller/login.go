@@ -20,8 +20,10 @@ func (c *Controller) Login(ctx context.Context, request *config.Request, reply *
 	}
 	var user models.User
 	c.database.NewDatabase().Where("username = ?", data.Username).First(&user)
-
-	reply.Message = ky3k.JsonToString(user)
+	if user.ID > 0 {
+		reply.Message = ky3k.JsonToString(user)
+		c.logic.UserAuth(user.ID)
+	}
 
 	return nil
 }

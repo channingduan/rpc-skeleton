@@ -4,6 +4,12 @@
   "service_name":"测试服务",
   "service_addr":"127.0.0.1:8089",
   "rate_limit": 10,
+  "token_config": {
+    "access_secret": "hello.test",
+    "refresh_secret": "test.hello",
+    "access_expire": 15,
+    "refresh_expire": 10080
+  },
   "registry_config":{
     "driver":"consul",
     "addr":"127.0.0.1:8500"

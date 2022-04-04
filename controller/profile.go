@@ -26,10 +26,11 @@ func (c *Controller) Profile(ctx context.Context, request *config.Request, reply
 	var user models.User
 	c.database.NewDatabase().Where("id = ?", data.UserId).Find(&user)
 
-	reply.Message = ky3k.JsonToString(ProfileResponse{
-		UserId:   user.ID,
-		Username: user.Username,
-	})
+	var result ProfileResponse
+	result.UserId = user.ID
+	result.Username = user.Username
+
+	reply.Message = ky3k.JsonToString(result)
 
 	return nil
 }

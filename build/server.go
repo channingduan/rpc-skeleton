@@ -12,7 +12,7 @@ import (
 
 type Router struct {
 	Name  string `json:"name"`
-	Roter string
+	Roter string `json:"roter"`
 }
 
 func main() {

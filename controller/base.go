@@ -1,6 +1,8 @@
 package controller
 
 import (
+	"fmt"
+	"github.com/channingduan/rpc-skeleton/logic"
 	"github.com/channingduan/rpc/cache"
 	"github.com/channingduan/rpc/client"
 	"github.com/channingduan/rpc/config"
@@ -14,6 +16,7 @@ type Controller struct {
 	cache     *cache.Cache
 	database  *database.Database
 	validator *validator.Validator
+	logic     *logic.Logic
 }
 
 func Register(config *config.Config) *Controller {
@@ -25,6 +28,8 @@ func Register(config *config.Config) *Controller {
 		database:  database.Register(config),
 		validator: validator.NewValidator(),
 	}
+	fmt.Println("controller.cache", controller.cache)
+	controller.logic = logic.NewLogic(config, controller.cache)
 
 	return &controller
 }
